@@ -1,8 +1,8 @@
-import { z } from 'zod'
 import { impl, todo } from 'zenbox-util/todo'
-import { ComponentSchema } from './models/Component'
-import { Call } from '../programming/models/Call'
-import { Func } from '../programming/models/Func'
+import { z } from 'zod'
+import { Call } from '../../programming/models/Call'
+import { Func } from '../../programming/models/Func'
+import { ComponentSchema } from './Component'
 
 /**
  * A content factory is a list of components that encourage users to execute actions
