@@ -1,44 +1,61 @@
-import { z } from 'zod'
-import { getDuplicatesRefinement } from 'zenbox-util/zod'
-import { NameSchema } from '../../generic/models/Name'
-import { GenericItemSchema } from './GenericItem'
-import { identity } from 'lodash-es'
-import { DescriptionSchema } from '../../generic/models/Description'
-import { ButtonSchema } from './Button'
 import { ThoughtSchema } from 'libs/generic/models/Thought'
+import { identity } from 'lodash-es'
+import { getDuplicatesRefinement } from 'zenbox-util/zod'
+import { z } from 'zod'
+import { DescriptionSchema } from '../../generic/models/Description'
+import { NameSchema } from '../../generic/models/Name'
 import { NotesSchema } from '../../generic/models/Notes'
+import { ButtonSchema } from './Button'
+import { GenericItemBlockSchema } from './GenericItemBlock'
+
+const HeroBlockSchema = z.object({
+  type: z.literal('hero'),
+  title: NameSchema,
+  subtitle: NameSchema.optional(),
+  buttons: z.array(ButtonSchema).optional(),
+})
+
+const ItemsBlockSchema = z.object({
+  type: z.literal('items'),
+  title: NameSchema.optional(),
+  items: z.array(GenericItemBlockSchema),
+  notes: NotesSchema,
+})
+
+const TextHighlightBlockSchema = z.object({
+  type: z.literal('text-highlight'),
+  image: z.string(),
+  title: NameSchema,
+  subtitle: NameSchema.optional(),
+  description: DescriptionSchema.optional(),
+  points: z.array(z.string()).optional(),
+  button: ButtonSchema.optional(),
+})
+
+const CardBlockSchema = z.object({
+  type: z.literal('card'),
+  title: NameSchema,
+  children: DescriptionSchema,
+})
+
+const TextBlockSchema = z.object({
+  type: z.literal('text'),
+  title: NameSchema,
+  description: DescriptionSchema,
+})
+
+const FaqBlockSchema = z.object({
+  type: z.literal('faq'),
+  questions: z.array(ThoughtSchema),
+})
 
 export const BlockSchema = z.discriminatedUnion('type', [
-  z.object({
-    type: z.literal('hero'),
-    title: NameSchema,
-    subtitle: NameSchema.optional(),
-    buttons: z.array(ButtonSchema).optional(),
-  }),
-  z.object({
-    type: z.literal('items'),
-    title: NameSchema.optional(),
-    items: z.array(GenericItemSchema),
-    notes: NotesSchema,
-  }),
-  z.object({
-    type: z.literal('text-highlight'),
-    image: z.string(),
-    title: NameSchema,
-    subtitle: NameSchema.optional(),
-    description: DescriptionSchema.optional(),
-    points: z.array(z.string()).optional(),
-    button: ButtonSchema.optional(),
-  }),
-  z.object({
-    type: z.literal('text'),
-    title: NameSchema,
-    description: DescriptionSchema,
-  }),
-  z.object({
-    type: z.literal('faq'),
-    questions: z.array(ThoughtSchema),
-  }),
+  HeroBlockSchema,
+  ItemsBlockSchema,
+  TextHighlightBlockSchema,
+  CardBlockSchema,
+  TextBlockSchema,
+  FaqBlockSchema,
 ]).describe('Block')
 
 // Can't define BlockUidSchema
