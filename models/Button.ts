@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { getDuplicatesRefinement } from 'zenbox-util/zod'
-import { isEqualBy } from 'zenbox-util/lodash'
+import { isEqualByD } from 'zenbox-util/lodash'
 import { NameSchema } from '../../generic/models/Name'
 
 export const ButtonSchema = z.object({
@@ -30,4 +30,4 @@ export function parseButtonUid(buttonUid: ButtonUid): ButtonUid {
   return ButtonUidSchema.parse(buttonUid)
 }
 
-export const isEqualButton = (a: Button) => (b: Button) => isEqualBy(a, b, parseButtonUid)
+export const isEqualButton = (a: Button) => (b: Button) => isEqualByD(a, b, parseButtonUid)

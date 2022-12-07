@@ -1,4 +1,4 @@
-import { isEqualBy } from 'zenbox-util/lodash'
+import { isEqualByD } from 'zenbox-util/lodash'
 import { getArraySchema } from 'zenbox-util/zod'
 import { z } from 'zod'
 import { DescriptionSchema } from '../../generic/models/Description'
@@ -33,4 +33,4 @@ export function parseGenericItemBlockUid(uid: GenericItemBlockUid): GenericItemB
   return GenericItemBlockUidSchema.parse(uid)
 }
 
-export const isEqualGenericItem = (a: GenericItemBlock) => (b: GenericItemBlock) => isEqualBy(a, b, parseGenericItemBlockUid)
+export const isEqualGenericItem = (a: GenericItemBlock) => (b: GenericItemBlock) => isEqualByD(a, b, parseGenericItemBlockUid)
