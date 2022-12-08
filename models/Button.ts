@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { getDuplicatesRefinement } from 'zenbox-util/zod'
-import { isEqualByD } from 'zenbox-util/lodash'
+import { getDuplicatesRefinement } from 'libs/utils/zod'
+import { isEqualByD } from 'libs/utils/lodash'
 import { NameSchema } from '../../generic/models/Name'
 
 export const ButtonSchema = z.object({
