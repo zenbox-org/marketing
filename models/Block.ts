@@ -1,6 +1,6 @@
 import { ThoughtSchema } from 'libs/generic/models/Thought'
-import { identity } from 'lodash-es'
 import { getDuplicatesRefinement } from 'libs/utils/zod'
+import { identity } from 'lodash-es'
 import { z } from 'zod'
 import { DescriptionSchema } from '../../generic/models/Description'
 import { NameSchema } from '../../generic/models/Name'

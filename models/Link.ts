@@ -1,7 +1,5 @@
 import { z } from 'zod'
-import { toUidFromSchema } from 'libs/utils/uid'
 import { UrlSchema } from '../../generic/models/Url'
-import { Id } from '../../generic/models/Id'
 
 export const LinkSchema = z.object({
   title: z.string().min(1),
@@ -21,5 +19,5 @@ export function validateLink(link: Link) {
 }
 
 export function getLinkUid(linkUid: LinkUid) {
-  return toUidFromSchema(linkUid, LinkUidSchema)
+  return LinkUidSchema.parse(linkUid)
 }

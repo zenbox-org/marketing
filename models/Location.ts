@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { UrlSchema } from '../../generic/models/Url'
 import { Id } from '../../generic/models/Id'
+import { UrlSchema } from '../../generic/models/Url'
 
 export const LocationSchema = UrlSchema
 
